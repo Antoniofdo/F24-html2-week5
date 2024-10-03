@@ -93,16 +93,209 @@ footer p{
 	background-color: lightblue;
 }
 
-.shape1 :nth-child(2){
+.shape1:nth-child(1){
+	animation-name: pendulum;
+	animation-duration: 5s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+	/* can change direction */
+	animation-direction: alternate-reverse;
+}
+
+.shape1:nth-child(2){
 	/* use transform to rotate the element. measured in degree */
 	transform: rotate(45deg);
-
+     /* transition tells element to animate a change */
+	 transition: all 2s;
+	 /* transition is a shorthand property-  at minimum, you need something to transition
+	 and a time for animation "all" means any change will be animated*/
 }
 
-.shape1 :nth-child(3){
+.shape1:nth-child(3){
 	/* use transform:scale to change the size of an object. 1is deafault measured size */
-	transform:scale(0.5 0.75) ;
+	transform: scale(0.75) ;
 	/* one value width
 	one value height */
+	transition: background-color 2s, transform 5s;
+
+	/* try the compex jump */
+	animation: complex-jump 3s ease-in-out infinite;
 
 }
+
+.shape1:nth-child(3):hover{
+	background-color: red;
+}
+
+.shape1:nth-child(3):active{
+	transform: scale(4, 4);
+}
+
+
+/*  */
+.shape1:nth-child(4){
+	/* use transform:stew distortion to the element it is also measured in deg. It can be negative or postive value */
+	transform: skew(30deg);
+
+    animation-name: jump;
+	animation-duration: 4s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+	animation-delay: 2s;
+
+}
+
+.shape1:nth-child(2):hover{
+	transform: rotate(360deg);
+}
+
+.shape1:nth-child(5){
+	/* transform mutliple propertise at the same time */
+	transform: rotate(240deg) scale(0.8) skew(10deg, 40deg);
+    transition: all 2s;
+	/* if we want to apply the animation, call it by name...*/
+	animation-name: jump;
+	animation-duration: 5s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+}
+
+.shape1:nth-child(5):hover{
+	/* transform mutliple propertise at the same time */
+	transform: rotate(360deg) scale(2.3) skew(30deg, 10deg);
+}
+
+/* Animation */
+
+@keyframes jump{
+	/* keyframes are points in an animation */
+	50%{
+		transform:translate(0, -100px);
+	}
+}
+
+
+@keyframes pendulum{
+	/* use 0%,100% to apply a property to the whole animation */
+	0%,
+	100%{
+		transform-origin: 0 -100px;
+		}
+	0%{
+		transform: rotate(77deg);
+		}
+	100%{
+		transform: rotate(45deg);
+	}		
+}
+
+@keyframes complex-jump{
+	
+	5%{
+		transform: scaleY(0.9);
+		transform: translateY((0));
+	}
+	10%{
+		transform: scaleY(1.1);
+	}
+	50%{
+		transform: scaleY(1);
+		transform: translateY(-100px);
+	}
+	90%{
+		transform: scaleY(1);
+	}
+	95%{
+		transform: scaleY(0.9);
+		transform: translateY(0);
+	}
+	100%{
+		transform: scaleY(1);
+	}
+}
+
+/* slider */
+.slider{
+	margin: 30px auto 0;
+	/* three properties in margin mean top-left-right,bottom */
+	width: 100%;
+	/* textalign will center images as well as text */
+	text-align: center;
+	overflow: hidden;
+}
+.slideback{
+	position:relative;
+}
+
+.slideback > img{
+	width: 100%;
+}
+
+.slideholder{
+	/* position:absoulte is relative to the browser window */
+	position: absolute;
+	top: 0;
+	width: 300%;
+	height: 100%;
+	display: flex;
+	transition: margin 1s;
+}
+
+.imgslide{
+	flex-grow:1 ;
+	height: 100%;
+
+}
+
+.imgslide img{
+	margin-top: 26%;
+    width:26%
+}
+
+#slide1:checked~.slideback .slideholder{ margin-left: 0;}
+#slide2:checked~.slideback .slideholder{ margin-left: -100%;}
+#slide3:checked~.slideback .slideholder{ margin-left: -200%;}
+
+
+/* LABELS */
+
+label{
+	display: inline-block;
+	width: 100px;
+	padding: 5px 0;
+	text-align: center;
+	margin: 0 15px;
+	border: 2px solid hsla(101, 100%, 30%, 1.00);
+	background:hsla(101, 100%, 80%, 1.00);
+	font-size: 24px;
+	border-radius: 10px;
+	transition: background 0.5s, transform 0.7s;
+}
+
+label:hover{
+	background: hsla(101, 100%, 40%, 1.00);
+	cursor: pointer;
+}
+
+label:active{
+	transform: scale(0.9);
+}
+
+input[type="radio"]{
+	display: none;
+}
+
+#slide1:checked~ label:nth-of-type(1){
+	background: hsla(101, 100%, 50%, 1.00);
+    font-weight: bold;}
+
+#slide2:checked~ label:nth-of-type(2){
+	background: hsla(101, 100%, 50%, 1.00);
+	font-weight: bold;}
+
+#slide3:checked~ label:nth-of-type(3){
+	background: hsla(101, 100%, 50%, 1.00);
+	font-weight: bold;}
+	
+	
+
