@@ -80,3 +80,29 @@ footer p{
 	padding:20px;
 	text-align:right;
 }
+
+.shapes{
+	display: flex;
+	justify-content: space-evenly;
+
+}
+
+.shape1{
+	width: 60px;
+	height: 60px;
+	background-color: lightblue;
+}
+
+.shape1 :nth-child(2){
+	/* use transform to rotate the element. measured in degree */
+	transform: rotate(45deg);
+
+}
+
+.shape1 :nth-child(3){
+	/* use transform:scale to change the size of an object. 1is deafault measured size */
+	transform:scale(0.5 0.75) ;
+	/* one value width
+	one value height */
+
+}
